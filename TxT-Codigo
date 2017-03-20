@@ -18,6 +18,7 @@ public class Viagem {
 		System.out.println("quantos dias vai viajar?");
 		dias = entrada.nextInt();
 		horas = dias*24;
+		
 		//primeira parte, que define viagens no pais de origem
 		System.out.println("quantas cidades visitará no pais de origem?");
 		cidades = entrada.nextInt();
@@ -37,8 +38,47 @@ public class Viagem {
 			else if(cidades <=0 || horas <10){
 				
 			}
+			viagem = 0;
+			cidades = 0;
+			System.out.println("deseja mudar de pais?");
+				resposta = entrada.next();	
+				if(resposta.equals("sim")){
+					horas = horas-3;
+					horas = horas -  11;
+					cidadesr = -1;
+					paisesv = paisesv + 1;
+					visitadas = visitadas+1;
+					System.out.println("quantas cidades visitará nesse pais?");
+					cidades = entrada.nextInt();
+					cidadesr = cidadesr+cidades;
+					viagem = cidadesr*10;
+						if(cidadesr > 0 && horas > viagem ){
+							horas = horas - viagem;
+							visitadas = visitadas + cidadesr;
+						
+						}
+						else if(cidadesr > 0 && horas < viagem && horas >=10){
+							while(cidadesr >0 && horas >= 10){
+								horas = horas - 10;
+								cidadesr = cidadesr-1;
+								visitadas = visitadas+1;
+							}
+						}
+						else if(cidades <=0 || horas <10){
+							
+						}
+				
+				
+				}
+				else if (resposta.equals("nao")){
+					horas = horas-2;
+					System.out.println("voce visitou "+ paisesv + " paises, e "+ visitadas + " cidades.");
+					System.exit(0);
+				}
+			
 		
-			// segunda parte, viagens apos pais de origem
+		
+			// terceira parte, viagens para segundo novo pais em diante
 			while(horas>=11){
 			viagem = 0;
 			cidades = 0;
@@ -71,14 +111,14 @@ public class Viagem {
 				
 				
 				}
-				else if (resposta =="nao"){
-					System.out.println("voce visitou "+ paisesv + "paises, e "+ visitadas + "cidades");
+				else if (resposta.equals("nao")){
+					System.out.println("voce visitou "+ paisesv + " paises, e "+ visitadas + " cidades.");
 					System.exit(0);
 				}
 			
-		}; 
+		} 
 		
-			do{
+			while(horas<11){
 			
 				System.out.println("deseja mudar de pais?");
 				resposta = entrada.next();	
@@ -87,13 +127,11 @@ public class Viagem {
 						System.out.println("quantas cidades visitará nesse pais?");
 						cidades = entrada.nextInt();
 					}
-					else {
+					else if(resposta.equals("nao")){
 						System.out.println("voce visitou "+ paisesv + " paises, e "+ visitadas + " cidades.");
 						System.exit(0);
 					}
 			
-			}while(horas<11);
+			}
 	}
 }
-
-
